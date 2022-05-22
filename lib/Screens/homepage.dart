@@ -99,19 +99,22 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 10),
-              Container(
-                height: 250,
-                width: 250,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey,
+              Card(
+                elevation: 25,
+                child: Container(
+                  height: 250,
+                  width: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.grey,
+                  ),
+                  child: _image == null
+                      ? Image.asset(
+                          'assets/images/demo .jpg',
+                          fit: BoxFit.cover,
+                        )
+                      : Image.file(_image!, fit: BoxFit.cover),
                 ),
-                child: _image == null
-                    ? Image.asset(
-                        'assets/images/demo .jpg',
-                        fit: BoxFit.cover,
-                      )
-                    : Image.file(_image!, fit: BoxFit.cover),
               ),
               const SizedBox(height: 20),
               // Text(
