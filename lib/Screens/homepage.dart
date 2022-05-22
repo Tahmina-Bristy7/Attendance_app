@@ -1,5 +1,4 @@
 import 'package:attendance/Widgetes/buttonWidget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -76,14 +75,24 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Colors.teal,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.teal),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Container(
-        height: MediaQuery.of(context).size.height / 1.2,
+        height: MediaQuery.of(context).size.height / 1.4,
         width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(40),
-                bottomLeft: Radius.circular(40))),
+                bottomRight: Radius.circular(50),
+                bottomLeft: Radius.circular(50))),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -98,9 +107,9 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey,
                 ),
                 child: _image == null
-                    ? const Icon(
-                        Icons.person_add,
-                        size: 80,
+                    ? Image.asset(
+                        'assets/images/demo .jpg',
+                        fit: BoxFit.cover,
                       )
                     : Image.file(_image!, fit: BoxFit.cover),
               ),
@@ -111,6 +120,8 @@ class _HomePageState extends State<HomePage> {
               // ),
               const SizedBox(height: 10),
               BuildButton(
+                inputColor: Colors.blueGrey,
+                sizeWidth: MediaQuery.of(context).size.width / 1.8,
                 onClick: () {
                   getimage();
                 },
@@ -130,9 +141,11 @@ class _HomePageState extends State<HomePage> {
               //   icon: Icons.add_location_alt_outlined,
               //   title: 'Get Location',
               // ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 25),
               BuildButton(
+                inputColor: Colors.teal,
                 onClick: () {},
+                sizeWidth: MediaQuery.of(context).size.width / 2.5,
                 icon: Icons.arrow_circle_right,
                 title: 'Submit',
               ),
