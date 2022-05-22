@@ -1,6 +1,5 @@
-import 'package:attendance/Screens/homepage.dart';
 import 'package:attendance/Screens/login_page.dart';
-import 'package:attendance/Screens/login_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
