@@ -85,74 +85,80 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height / 1.4,
-        width: MediaQuery.of(context).size.width,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(50),
-                bottomLeft: Radius.circular(50))),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 10),
-              Card(
-                elevation: 25,
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.grey,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(topRight: Radius.circular(80)),
+          child: Container(
+            height: MediaQuery.of(context).size.height / 1.4,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    //bottomRight: Radius.circular(50),
+                    bottomLeft: Radius.circular(50))),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 10),
+                  Card(
+                    elevation: 25,
+                    child: Container(
+                      height: 250,
+                      width: 250,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey,
+                      ),
+                      child: _image == null
+                          ? Image.asset(
+                              'assets/images/demo .jpg',
+                              fit: BoxFit.cover,
+                            )
+                          : Image.file(_image!, fit: BoxFit.cover),
+                    ),
                   ),
-                  child: _image == null
-                      ? Image.asset(
-                          'assets/images/demo .jpg',
-                          fit: BoxFit.cover,
-                        )
-                      : Image.file(_image!, fit: BoxFit.cover),
-                ),
+                  const SizedBox(height: 20),
+                  // Text(
+                  //   'Address: ${Address}',
+                  //   style: const TextStyle(fontSize: 20),
+                  // ),
+                  const SizedBox(height: 10),
+                  BuildButton(
+                    inputColor: Colors.blueGrey,
+                    sizeWidth: MediaQuery.of(context).size.width / 1.8,
+                    onClick: () {
+                      getimage();
+                    },
+                    icon: Icons.camera_alt_outlined,
+                    title: 'Take a Picture',
+                  ),
+                  // BuildButton(
+                  //   onClick: () async {
+                  //     Position position = await _getGeoLocationPosition();
+                  //     GetAddressFromLatLong(position);
+                  //     setState(() {
+                  //       location =
+                  //           'Latitude: ${position.latitude} , Longitude: ${position.longitude}';
+                  //     });
+                  //     // print(location);
+                  //   },
+                  //   icon: Icons.add_location_alt_outlined,
+                  //   title: 'Get Location',
+                  // ),
+                  const SizedBox(height: 25),
+                  BuildButton(
+                    inputColor: Colors.teal,
+                    onClick: () {},
+                    sizeWidth: MediaQuery.of(context).size.width / 2.5,
+                    icon: Icons.arrow_circle_right,
+                    title: 'Submit',
+                  ),
+                ],
               ),
-              const SizedBox(height: 20),
-              // Text(
-              //   'Address: ${Address}',
-              //   style: const TextStyle(fontSize: 20),
-              // ),
-              const SizedBox(height: 10),
-              BuildButton(
-                inputColor: Colors.blueGrey,
-                sizeWidth: MediaQuery.of(context).size.width / 1.8,
-                onClick: () {
-                  getimage();
-                },
-                icon: Icons.camera_alt_outlined,
-                title: 'Take a Picture',
-              ),
-              // BuildButton(
-              //   onClick: () async {
-              //     Position position = await _getGeoLocationPosition();
-              //     GetAddressFromLatLong(position);
-              //     setState(() {
-              //       location =
-              //           'Latitude: ${position.latitude} , Longitude: ${position.longitude}';
-              //     });
-              //     // print(location);
-              //   },
-              //   icon: Icons.add_location_alt_outlined,
-              //   title: 'Get Location',
-              // ),
-              const SizedBox(height: 25),
-              BuildButton(
-                inputColor: Colors.teal,
-                onClick: () {},
-                sizeWidth: MediaQuery.of(context).size.width / 2.5,
-                icon: Icons.arrow_circle_right,
-                title: 'Submit',
-              ),
-            ],
+            ),
           ),
         ),
       ),
