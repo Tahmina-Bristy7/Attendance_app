@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
         Address =
             '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}, ${place.country}';
       });
+      print(Address);
     }
 
     @override
@@ -76,10 +77,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.teal,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.teal),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -88,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(topRight: Radius.circular(80)),
+          borderRadius: const BorderRadius.only(topRight: Radius.circular(80)),
           child: Container(
             height: MediaQuery.of(context).size.height / 1.4,
             width: MediaQuery.of(context).size.width,
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                     //bottomRight: Radius.circular(50),
-                    bottomLeft: Radius.circular(50))),
+                    bottomLeft: Radius.circular(80))),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

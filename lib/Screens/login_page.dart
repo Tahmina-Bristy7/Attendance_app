@@ -34,8 +34,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
+    bool _obscureText = true;
 
     return Scaffold(
+      // resizeToAvoidBottomInset: false,
       backgroundColor: Colors.teal,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -45,20 +47,22 @@ class _LoginPageState extends State<LoginPage> {
                 height: screenHeight / 4,
                 width: screenWidth,
                 child: Center(
-                    child: Text('Welcome to Our Company',
-                        style: TextStyle(
-                            color: Colors.white, fontSize: screenWidth / 14))),
+                  child: Text('Sign In',
+                      style: TextStyle(
+                          color: Colors.white, fontSize: screenWidth / 14)),
+                ),
               ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                height: screenHeight - screenHeight / 4,
-                width: screenWidth,
-                decoration: BoxDecoration(
-                    color: initialColor,
-                    borderRadius: BorderRadius.only(
-                        topRight: const Radius.circular(60),
-                        topLeft: const Radius.circular(60))),
-                child: Flexible(
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  height: screenHeight - screenHeight / 3.2,
+                  width: screenWidth,
+                  decoration: BoxDecoration(
+                      color: initialColor,
+                      borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(60),
+                          topLeft: Radius.circular(60))),
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: screenWidth / 60),
                     child: Column(
@@ -67,12 +71,19 @@ class _LoginPageState extends State<LoginPage> {
                           height: screenHeight / 28,
                         ),
                         Text(
-                          'Login',
+                          'Welcome Back',
                           style: TextStyle(
                               color: Colors.teal,
                               fontSize: screenWidth / 9,
                               fontWeight: FontWeight.bold),
                         ),
+                        Text(
+                          'Glad to see you!',
+                          style: TextStyle(
+                              color: Colors.grey, fontSize: screenWidth / 16),
+                        ),
+
+                        // Login form
                         Form(
                           key: _formKey,
                           child: Padding(
@@ -84,7 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                                 TextFormField(
                                   decoration: const InputDecoration(
                                       labelText: 'Company Id',
-                                      labelStyle: TextStyle(color: Colors.teal),
+                                      labelStyle: TextStyle(
+                                        color: Colors.teal,
+                                      ),
                                       prefixIcon: Icon(Icons.person,
                                           color: Colors.teal)),
                                   controller: _companyIdController,
@@ -118,12 +131,14 @@ class _LoginPageState extends State<LoginPage> {
                                   height: screenHeight / 50,
                                 ),
                                 TextFormField(
-                                  decoration: const InputDecoration(
-                                      labelText: 'Password',
-                                      labelStyle: TextStyle(color: Colors.teal),
-                                      prefixIcon: Icon(Icons.vpn_key,
-                                          color: Colors.teal)),
+                                  obscureText: true,
                                   controller: _passwordController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Password',
+                                    labelStyle: TextStyle(color: Colors.teal),
+                                    prefixIcon:
+                                        Icon(Icons.vpn_key, color: Colors.teal),
+                                  ),
                                   validator: (value) {
                                     if (value != password) {
                                       return 'Please Your Valid Password';
