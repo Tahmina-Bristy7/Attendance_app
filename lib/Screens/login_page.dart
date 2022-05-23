@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    bool _obscureText = true;
+    // bool _obscureText = true;
 
     return Scaffold(
       // resizeToAvoidBottomInset: false,
