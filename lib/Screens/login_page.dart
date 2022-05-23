@@ -184,9 +184,10 @@ class _LoginPageState extends State<LoginPage> {
                                   controller: _passwordController,
                                   decoration: InputDecoration(
                                     labelText: 'Password',
-                                    labelStyle: TextStyle(color: Colors.teal),
-                                    prefixIcon:
-                                        Icon(Icons.vpn_key, color: Colors.teal),
+                                    labelStyle:
+                                        const TextStyle(color: Colors.teal),
+                                    prefixIcon: const Icon(Icons.vpn_key,
+                                        color: Colors.teal),
                                     suffixIcon: _obscureText == true
                                         ? IconButton(
                                             onPressed: () {
