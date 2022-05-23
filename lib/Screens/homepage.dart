@@ -1,7 +1,7 @@
 import 'package:attendance/Widgetes/buttonWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geocoding/geocoding.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? _image;
   final imagePicker = ImagePicker();
-
-  String Address = 'search';
 
   Future getimage() async {
     // ignore: deprecated_member_use
@@ -104,7 +102,9 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 25),
                   BuildButton(
                     inputColor: Colors.teal,
-                    onClick: () {},
+                    onClick: () {
+                      Navigator.pop(context);
+                    },
                     sizeWidth: MediaQuery.of(context).size.width / 2.5,
                     icon: Icons.arrow_circle_right,
                     title: 'Submit',

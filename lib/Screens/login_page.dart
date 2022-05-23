@@ -1,6 +1,7 @@
 import 'package:attendance/Screens/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,11 +20,12 @@ class _LoginPageState extends State<LoginPage> {
   double screenHeight = 0;
   double screenWidth = 0;
   Color initialColor = Colors.white;
-  var companyId = 12345;
-  var userId = '123@gmail.com';
-  var password = '1234';
+  // var companyId = 12345;
+  // var userId = '123@gmail.com';
+  // var password = '1234';
 
   bool _obscureText = true;
+  String? value;
 
   @override
   void dispose() {
@@ -38,7 +40,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
     screenWidth = MediaQuery.of(context).size.width;
-    // bool _obscureText = true;
 
     Future<Position> _getGeoLocationPosition() async {
       bool serviceEnabled;
@@ -65,6 +66,18 @@ class _LoginPageState extends State<LoginPage> {
           desiredAccuracy: LocationAccuracy.high);
     }
 
+    Future<void> _saveToShared_Preferences() async {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString("CID", _companyIdController.text.toString());
+    }
+
+    Future<void> _getDataToShared_Preferences(String value) async {
+      final prefs = await SharedPreferences.getInstance();
+      setState(() {
+        value = prefs.getString("CID")!;
+      });
+    }
+
     // Future<void> GetAddressFromLatLong(Position position) async {
     //   List<Placemark> placemarks =
     //       await placemarkFromCoordinates(position.latitude, position.longitude);
@@ -81,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
     @override
     void initState() async {
       _getGeoLocationPosition();
+      // _getDataToShared_Preferences(value);
     }
 
     return Scaffold(
@@ -137,17 +151,23 @@ class _LoginPageState extends State<LoginPage> {
                                 horizontal: screenWidth / 28),
                             child: Column(
                               children: [
+                                // Company ID Field
                                 TextFormField(
-                                  decoration: const InputDecoration(
-                                      labelText: 'Company Id',
-                                      labelStyle: TextStyle(
-                                        color: Colors.teal,
-                                      ),
-                                      prefixIcon: Icon(Icons.person,
-                                          color: Colors.teal)),
                                   controller: _companyIdController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Company Id',
+                                    labelStyle: TextStyle(
+                                      color: Colors.teal,
+                                    ),
+                                    prefixIcon:
+                                        Icon(Icons.person, color: Colors.teal),
+                                  ),
+                                  // onChanged: (value) async {
+                                  //   value = await _getDataToShared_Preferences(
+                                  //       'CID');
+                                  // },
                                   validator: (value) {
-                                    if (value != companyId.toString()) {
+                                    if (value!.isEmpty) {
                                       return 'Please Provide Your valid CompanyId';
                                     } else {
                                       return null;
@@ -167,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                           color: Colors.teal)),
                                   controller: _userIdController,
                                   validator: (value) {
-                                    if (value != userId) {
+                                    if (value!.isEmpty) {
                                       return 'Please Provide Your Valid User Id';
                                     } else {
                                       return null;
@@ -198,7 +218,7 @@ class _LoginPageState extends State<LoginPage> {
                                             icon: const Icon(
                                               Icons.visibility_off,
                                               size: 20,
-                                              color: Colors.red,
+                                              color: Colors.grey,
                                             ))
                                         : IconButton(
                                             onPressed: () {
@@ -209,13 +229,13 @@ class _LoginPageState extends State<LoginPage> {
                                             icon: const Icon(
                                               Icons.remove_red_eye,
                                               size: 20,
-                                              color: Colors.red,
+                                              color: Colors.black,
                                             ),
                                           ),
                                   ),
                                   validator: (value) {
-                                    if (value != password) {
-                                      return 'Please Your Valid Password';
+                                    if (value!.isEmpty) {
+                                      return 'Please Enter Your Valid Password';
                                     } else {
                                       return null;
                                     }
@@ -243,6 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                                   location =
                                       'Latitude: ${position.latitude} , Longitude: ${position.longitude}';
                                 });
+                                _saveToShared_Preferences();
                                 print(location);
                               },
                               child: const Text(
